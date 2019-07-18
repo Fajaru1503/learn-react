@@ -8,6 +8,7 @@ function App() {
       <h1>Hi, Let's Make React App</h1>
     </div>
   );
+  // return React.createElement('div', null, React.createElement('h1', {className: 'App'}, 'Hi, Let\'s Make React App'));
 }
 
 export default App;
