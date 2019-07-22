@@ -81,6 +81,7 @@ class App extends Component {
       backgroundColor: "white",
       border: "1px solid #d9d9d9",
       borderRadius: "10px",
+      cursor: "pointer",
       padding: "10px"
     };
 
