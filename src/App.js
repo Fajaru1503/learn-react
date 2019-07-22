@@ -11,11 +11,16 @@ const App = props => {
 
   console.log(studentsState);
 
-  const switchNameHandler = () => {
-    // alert("HEHE");
+  const switchNameHandler = newNames => {
     // this.state.name[0].name = "NEW FAJARU"; DON'T DO THIS STUPID SYNTAX
     setStudentsState({
       name: [{ name: "Bhirawa", age: 30 }, { name: "Dewangga", age: 35 }]
+    });
+  };
+
+  const changNamesHandler = e => {
+    setStudentsState({
+      name: [{ name: e.target.value, age: 20 }, { name: "Fajar", age: 25 }]
     });
   };
 
@@ -32,14 +37,12 @@ const App = props => {
     <div className="App">
       <h1>Hi, Let's Make React App</h1>
       <p>This is Working!</p>
-      {/* <button onClick={() => switchHandler("YOU KNOW YOU CAN DO IT")}>
-        Switch Names
-      </button> */}
+      {/* <button onClick={() => switchHandler("YOU KNOW YOU CAN DO IT")}>Switch Names</button> NOT RECOMENDED */}
       <button onClick={switchHandler.bind(this, "YOU KNOW YOU CAN DO IT")}>
         Switch Names
       </button>
       {studentsState.name.map(e => (
-        <Students name={e.name} age={e.age} />
+        <Students name={e.name} age={e.age} setNames={changNamesHandler} />
       ))}
       <h2>{spiritState}</h2>
     </div>
