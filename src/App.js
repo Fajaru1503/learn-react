@@ -55,7 +55,8 @@ import Students from "./Students/Students";
 class App extends Component {
   state = {
     students: [{ name: "Fajaru", age: 20 }, { name: "Fajar", age: 25 }],
-    spirit: "KEEP THE SPIRIT DUDE"
+    spirit: "KEEP THE SPIRIT DUDE",
+    status: false
   };
 
   switchNameHandler = newName => {
@@ -76,13 +77,22 @@ class App extends Component {
     });
   };
 
+  showDataHandler = () => {
+    const doesShow = this.state.status;
+    this.setState({ status: !doesShow });
+  };
+
   render() {
     const style = {
-      backgroundColor: "white",
-      border: "1px solid #d9d9d9",
-      borderRadius: "10px",
-      cursor: "pointer",
-      padding: "10px"
+      buttonStyle: {
+        backgroundColor: "white",
+        border: "1px solid #d9d9d9",
+        borderRadius: "10px",
+        cursor: "pointer",
+        display: "block",
+        margin: "10px auto",
+        padding: "10px"
+      }
     };
 
     return (
@@ -91,21 +101,26 @@ class App extends Component {
         <p>This is Working!</p>
         {/* <button onClick={() => switchHandler("YOU KNOW YOU CAN DO IT")}>Switch Names</button> NOT RECOMENDED */}
         <button
-          style={style}
+          style={style.buttonStyle}
           onClick={this.switchSpiritHandler.bind(
             this,
             "YOU KNOW YOU CAN DO IT"
           )}
         >
-          Switch Names
+          Hype Yourself
         </button>
-        {this.state.students.map(e => (
-          <Students
-            name={e.name}
-            age={e.age}
-            setNames={this.nameChangeHandler}
-          />
-        ))}
+        <button style={style.buttonStyle} onClick={this.showDataHandler}>
+          Show Data
+        </button>
+        {this.state.status
+          ? this.state.students.map(e => (
+              <Students
+                name={e.name}
+                age={e.age}
+                setNames={this.nameChangeHandler}
+              />
+            ))
+          : null}
         <h2>{this.state.spirit}</h2>
       </div>
     );

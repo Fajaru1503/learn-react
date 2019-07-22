@@ -9,7 +9,12 @@ const student = props => {
         old
       </p>
       <p>{props.children}</p>
-      <input type="text" onChange={props.setNames} value={props.name} />
+      <input
+        style={{ textAlign: "center" }}
+        type="text"
+        onChange={props.setNames}
+        value={props.name}
+      />
     </div>
   );
 };
