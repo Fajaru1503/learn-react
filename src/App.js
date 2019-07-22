@@ -54,21 +54,36 @@ import Students from "./Students/Students";
 // class based
 class App extends Component {
   state = {
-    students: [{ name: "Fajaru", age: 20 }, { name: "Fajar", age: 25 }],
+    students: [
+      { name: "Fajaru", age: 20, id: 1 },
+      { name: "Fajar", age: 25, id: 2 }
+    ],
     spirit: "KEEP THE SPIRIT DUDE",
     status: false
   };
 
-  switchNameHandler = newName => {
-    this.setState({
-      students: [{ name: newName, age: 20 }, { name: "Fajar", age: 25 }]
-    });
+  deleteDataHandler = studentIndex => {
+    // const students = this.state.students.slice(); COPYING THE WHOLE DATA BEFORE CHANGE IT
+    const students = [...this.state.students];
+    students.splice(studentIndex, 1);
+    this.setState({ students: students });
   };
 
-  nameChangeHandler = e => {
-    this.setState({
-      students: [{ name: e.target.value, age: 20 }, { name: "Fajar", age: 25 }]
+  nameChangeHandler = (event, index) => {
+    const studentIndex = this.state.students.findIndex(s => {
+      return s.id === index;
     });
+
+    const student = {
+      ...this.state.students[studentIndex]
+    };
+
+    student.name = event.target.value;
+
+    const students = [...this.state.students];
+    students[studentIndex] = student;
+
+    this.setState({ students: students });
   };
 
   switchSpiritHandler = newMessage => {
@@ -95,6 +110,24 @@ class App extends Component {
       }
     };
 
+    let datas = null;
+
+    if (this.state.status) {
+      datas = (
+        <div>
+          {this.state.students.map((student, index) => (
+            <Students
+              name={student.name}
+              age={student.age}
+              key={student.id}
+              setNames={event => this.nameChangeHandler(event, student.id)}
+              deleteData={this.deleteDataHandler.bind(this, index)}
+            />
+          ))}
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>Hi, Let's Make React App</h1>
@@ -112,15 +145,7 @@ class App extends Component {
         <button style={style.buttonStyle} onClick={this.showDataHandler}>
           Show Data
         </button>
-        {this.state.status
-          ? this.state.students.map(e => (
-              <Students
-                name={e.name}
-                age={e.age}
-                setNames={this.nameChangeHandler}
-              />
-            ))
-          : null}
+        {datas}
         <h2>{this.state.spirit}</h2>
       </div>
     );

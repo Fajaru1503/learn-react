@@ -4,7 +4,7 @@ import "./Students.css";
 const student = props => {
   return (
     <div className="Students">
-      <p>
+      <p onClick={props.deleteData}>
         This is The React App That {props.name} Made, and He's {props.age} years
         old
       </p>
