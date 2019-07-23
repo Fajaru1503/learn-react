@@ -1,17 +1,11 @@
 import React from "react";
-import Radium from "radium";
+// import Radium from "radium";
 import "./Students.css";
 
 const student = props => {
-  const media = {
-    "@media only screen and (min-width: 1200px)": {
-      color: "red"
-    }
-  };
-
   return (
     <div className="Students">
-      <p onClick={props.deleteData} style={media}>
+      <p onClick={props.deleteData}>
         This is The React App That {props.name} Made, and He's {props.age} years
         old
       </p>
@@ -26,4 +20,4 @@ const student = props => {
   );
 };
 
-export default Radium(student);
+export default student;
