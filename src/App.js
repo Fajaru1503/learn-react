@@ -1,5 +1,5 @@
 import React, { useState, Component } from "react";
-import "./App.css";
+import appClasses from "./App.css";
 import Students from "./Students/Students";
 
 // function base
@@ -142,14 +142,14 @@ class App extends Component {
 
     const classes = [];
     if (this.state.students.length < 2) {
-      classes.push("red"); // classes = ['red']
+      classes.push(appClasses.red); // classes = ['red']
     }
     if (this.state.students.length < 1) {
-      classes.push("bold"); // classes = ['red', 'bold']
+      classes.push(appClasses.bold); // classes = ['red', 'bold']
     }
 
     return (
-      <div className="App">
+      <div className={appClasses.App}>
         <h1>Hi, Let's Make React App</h1>
         <p className={classes.join(" ")}>This is Working!</p>
         {/* <button onClick={() => switchHandler("YOU KNOW YOU CAN DO IT")}>Switch Names</button> NOT RECOMENDED */}

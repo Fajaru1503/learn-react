@@ -1,10 +1,9 @@
 import React from "react";
-// import Radium from "radium";
-import "./Students.css";
+import studentClasses from "./Students.css";
 
 const student = props => {
   return (
-    <div className="Students">
+    <div className={studentClasses.Students}>
       <p onClick={props.deleteData}>
         This is The React App That {props.name} Made, and He's {props.age} years
         old
