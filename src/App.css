@@ -7,3 +7,11 @@ body {
 .App {
   text-align: center;
 }
+
+.red {
+  color: red;
+}
+
+.bold {
+  font-weight: 700;
+}

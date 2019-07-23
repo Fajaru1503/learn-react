@@ -1,5 +1,6 @@
 import React, { useState, Component } from "react";
 import "./App.css";
+import Radium, { StyleRoot } from "radium";
 import Students from "./Students/Students";
 
 // function base
@@ -99,7 +100,22 @@ class App extends Component {
 
   render() {
     const style = {
-      buttonStyle: {
+      showButton: {
+        backgroundColor: "green",
+        border: "1px solid #d9d9d9",
+        borderRadius: "10px",
+        color: "white",
+        cursor: "pointer",
+        display: "block",
+        margin: "10px auto",
+        padding: "10px",
+        transition: "all 0.3s ease-in-out",
+        ":hover": {
+          backgroundColor: "lightgreen",
+          color: "#484848"
+        }
+      },
+      spiritButton: {
         backgroundColor: "white",
         border: "1px solid #d9d9d9",
         borderRadius: "10px",
@@ -126,30 +142,46 @@ class App extends Component {
           ))}
         </div>
       );
+      style.showButton.backgroundColor = "red";
+      style.showButton[":hover"] = {
+        backgroundColor: "lightcoral",
+        color: "#484848"
+      };
+    }
+
+    const classes = [];
+    if (this.state.students.length < 2) {
+      classes.push("red"); // classes = ['red']
+    }
+    if (this.state.students.length < 1) {
+      classes.push("bold"); // classes = ['red', 'bold']
     }
 
     return (
-      <div className="App">
-        <h1>Hi, Let's Make React App</h1>
-        <p>This is Working!</p>
-        {/* <button onClick={() => switchHandler("YOU KNOW YOU CAN DO IT")}>Switch Names</button> NOT RECOMENDED */}
-        <button
-          style={style.buttonStyle}
-          onClick={this.switchSpiritHandler.bind(
-            this,
-            "YOU KNOW YOU CAN DO IT"
-          )}
-        >
-          Hype Yourself
-        </button>
-        <button style={style.buttonStyle} onClick={this.showDataHandler}>
-          Show Data
-        </button>
-        {datas}
-        <h2>{this.state.spirit}</h2>
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hi, Let's Make React App</h1>
+          <p className={classes.join(" ")}>This is Working!</p>
+          {/* <button onClick={() => switchHandler("YOU KNOW YOU CAN DO IT")}>Switch Names</button> NOT RECOMENDED */}
+          <button
+            className="spiritButton"
+            style={style.spiritButton}
+            onClick={this.switchSpiritHandler.bind(
+              this,
+              "YOU KNOW YOU CAN DO IT"
+            )}
+          >
+            Hype Yourself
+          </button>
+          <button style={style.showButton} onClick={this.showDataHandler}>
+            {datas ? "Close Data" : "Show Data"}
+          </button>
+          {datas}
+          <h2>{this.state.spirit}</h2>
+        </div>
+      </StyleRoot>
     );
   }
 }
 
-export default App;
+export default Radium(App);
