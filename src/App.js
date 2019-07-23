@@ -98,30 +98,8 @@ class App extends Component {
   };
 
   render() {
-    const style = {
-      showButton: {
-        backgroundColor: "green",
-        border: "1px solid #d9d9d9",
-        borderRadius: "10px",
-        color: "white",
-        cursor: "pointer",
-        display: "block",
-        margin: "10px auto",
-        padding: "10px",
-        transition: "all 0.3s ease-in-out"
-      },
-      spiritButton: {
-        backgroundColor: "white",
-        border: "1px solid #d9d9d9",
-        borderRadius: "10px",
-        cursor: "pointer",
-        display: "block",
-        margin: "10px auto",
-        padding: "10px"
-      }
-    };
-
     let datas = null;
+    let showClass = appClasses.ShowButton;
 
     if (this.state.status) {
       datas = (
@@ -137,7 +115,8 @@ class App extends Component {
           ))}
         </div>
       );
-      style.showButton.backgroundColor = "red";
+
+      showClass = appClasses.CloseButton;
     }
 
     const classes = [];
@@ -154,8 +133,7 @@ class App extends Component {
         <p className={classes.join(" ")}>This is Working!</p>
         {/* <button onClick={() => switchHandler("YOU KNOW YOU CAN DO IT")}>Switch Names</button> NOT RECOMENDED */}
         <button
-          className="spiritButton"
-          style={style.spiritButton}
+          className={appClasses.Button}
           onClick={this.switchSpiritHandler.bind(
             this,
             "YOU KNOW YOU CAN DO IT"
@@ -163,7 +141,7 @@ class App extends Component {
         >
           Hype Yourself
         </button>
-        <button style={style.showButton} onClick={this.showDataHandler}>
+        <button className={showClass} onClick={this.showDataHandler}>
           {datas ? "Close Data" : "Show Data"}
         </button>
         {datas}
